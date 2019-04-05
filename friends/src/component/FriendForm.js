@@ -1,73 +1,72 @@
-// import React from 'React';
+import React from 'react';
 
-// class FriendForm extends Component {
-//     constructor() {
-//         super();
-//         this.state = {  
-//             addName: '',
-//             addAge: '',
-//             addEmail: ''
-//         }
-//     }
+class FriendForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+                name: '',
+                age: '',
+                email: ''
+        }
+    }
 
-//     handleChange = e => {
-//         this.setState({
-//             friend: {
-//                 [e.target.name]: e.target.value
-//             }
-//         })
+    handleChange = e => {
+        this.setState({
+                [e.target.name]: e.target.value
+        })
+    }
 
-//         handleSubmit = e => {
-//             e.preventDefault();
-//             let newFriend = {
-//                 name: this.state.name,
-//                 age: this.state.age,
-//                 email: this.state.email
-//             }
+    addFriend = e => {
+        e.preventDefault();
+        const newFriend = {
+            name: this.state.name,
+            age: this.state.age,
+            email: this.state.email
+        }
+        this.props.addFriend(newFriend)
+        
+        this.setState({
+                name: '',
+                age: '',
+                email: ''
+        }) 
+    }
 
-//             axios
-//                 .post('http://localhost:5000/friends', newFriend)
-//                 .then(response => {
-//                     this.setState({ friend: response.friend})
-//                 })
-//                 .catch(err => {console.log('Mistake made!', err)})
-           
-//         }
-
-//     render() { 
-//         return ( 
-//             <div className='form'>
-//                 <form onSubmit={this.handleSubmit}>
-//                     <h1>Add Friend</h1>
-//                     <input 
-//                         type='text'
-//                         name='name'
-//                         placeholder='Name'
-//                         onChange={this.handleChange}
-//                         vaule={this.state.friend.name}
-//                         />
-//                     <input 
-//                         type='text'
-//                         name='age'
-//                         placeholder='Age'
-//                         onChange={this.handleChange}
-//                         value={this.state.friend.age}
-//                         />
-//                     <input 
-//                         type='text'
-//                         name='email'
-//                         placeholder='email'
-//                         onChange={this.handleChange}
-//                         value={this.state.friend.email}
-//                         />  
-//                     <button type='submit'>
-//                         Add Friend
-//                     </button>
+    render() { 
+        return ( 
+            <div className='form'>
+                <form onSubmit={this.addFriend}>
+                    <h1>Add Friend</h1>
+                    <input 
+                        type='text'
+                        name='name'
+                        placeholder='Name'
+                        onChange={this.handleChange}
+                        value={this.state.name}
+                        />
+                    <input 
+                        type='number'
+                        name='age'
+                        placeholder='Age'
+                        onChange={this.handleChange}
+                        value={this.state.age}
+                        />
+                    <input 
+                        type='text'
+                        name='email'
+                        placeholder='email'
+                        onChange={this.handleChange}
+                        value={this.state.email}
+                        />  
+                    <button type='submit'>
+                        Add Friend
+                    </button>
             
-//                 </form>
-//             </div>
-//          );
-//     }
-// }
+                </form>
+            </div>
+         );
+    }
+}
+
  
-// export default FriendForm;
+export default FriendForm;
